@@ -28,4 +28,5 @@ Example Output:
 1. Bäckerei Müller
    Address: Hauptstraße 999, 10115 Berlin
    Phone: 0123456789
+   Website: www.abc.com
 
