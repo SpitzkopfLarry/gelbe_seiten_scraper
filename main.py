@@ -31,25 +31,20 @@ options.add_argument("--log-level=3")
 service = Service()
 driver = webdriver.Chrome(service=service, options=options)
 
-# --- Seite aufrufen ---
 driver.get(url)
 time.sleep(3)
 
-# --- HTML parsen ---
 soup = BeautifulSoup(driver.page_source, "html.parser")
 entries = soup.find_all("article", class_="mod mod-Treffer")
 
-# --- Daten extrahieren ---
 for i, entry in enumerate(entries, 1):
     # Name
     name_tag = entry.find("h2")
     name = name_tag.text.strip() if name_tag else "No Name"
 
-    # Adresse
     address_div = entry.find("div", class_="mod-AdresseKompakt__adress-text")
     address = " ".join(address_div.stripped_strings) if address_div else "No Address"
 
-    # Telefonnummer
     phone_tag = entry.find("a", class_="mod-TelefonnummerKompakt__phoneNumber")
     phone = phone_tag.text.strip() if phone_tag else "No Phone Number"
 
@@ -67,5 +62,4 @@ for i, entry in enumerate(entries, 1):
     print(f"   Phone:   {phone}")
     print(f"   Website: {website}\n")
 
-# --- Browser schließen ---
 driver.quit()
